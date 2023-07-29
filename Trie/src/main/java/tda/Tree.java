@@ -1,4 +1,4 @@
-package ggm.trees;
+package tda;
 
 public class Tree<E> {
     
@@ -21,6 +21,10 @@ public class Tree<E> {
 
     public void setRoot(E content) {
         this.root = new TreeNode<>(content);
+    }
+    
+    public boolean isLeaf(){
+        return root.getChildren().isEmpty();
     }
     
     
