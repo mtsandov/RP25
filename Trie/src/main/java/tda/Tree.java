@@ -175,6 +175,27 @@ public Tree<E> getSubTree(String prefix) {
 
         return words;
     }
+    
+    public List<String> inverseAutoComplete(String suffix) {
+        List<String> words = new ArrayList<>();
+        TreeNode<E> current = root;
+        int i = 0;
+        while (i< suffix.length()) {
+            char character = suffix.charAt(i);
+            if (!current.getChildren().containsKey(character)) {
+                // Si no se encuentra un enlace para la letra actual, no hay palabras que autocompletar
+                return words;
+            }
+            // Moverse al siguiente nodo
+            current = current.getChildren().get(character);
+            i++;
+        }
+
+        // Si el prefijo existe en el árbol Trie, realizar recorrido DFS para autocompletar palabras
+        autoCompleteDFS(current, suffix, words);
+
+        return words;
+    }
 
     // Método auxiliar para realizar el recorrido DFS y autocompletar palabras
     private void autoCompleteDFS(TreeNode<E> node, String currentWord, List<String> words) {
