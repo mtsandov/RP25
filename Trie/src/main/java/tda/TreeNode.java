@@ -12,7 +12,7 @@ class TreeNode<E> {
     // private List<Tree<E>> children;
     private Map<E, TreeNode<E>> children;
    
-
+ 
     private boolean isLeaf; // Indicador de nodo hoja
     private String word; // Palabra insertada (solo presente en nodos hoja)
 
@@ -32,9 +32,6 @@ class TreeNode<E> {
         return word;
     }
     
-    public void setWord(){
-        this.word =word;
-    }
     
     public E getContent() {
         return content;

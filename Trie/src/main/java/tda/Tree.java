@@ -125,7 +125,7 @@ public class Tree<E> {
                 current.getChildren().put((E) Character.valueOf(character), new TreeNode(character));
             }
             // Se mueve al siguiente nodo
-            current = current.getChildren().get((E) Character.valueOf(character));
+            current = current.getChildren().get(character);
         }
         // Marca el último nodo como hoja e inserta la palabra
         current.setLeaf(true);
