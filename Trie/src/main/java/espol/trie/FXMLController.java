@@ -69,8 +69,8 @@ public class FXMLController implements Initializable {
          }else {
          AlertBoxes.errorAlert("Fallo", "No se ha encontrado la palabra", "Inténte con otra palabra");
     }
-
-    
 }
+    
+    
 
 }

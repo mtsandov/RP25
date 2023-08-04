@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="461.0" prefWidth="434.0" style="-fx-background-color: rgb(10,0,0);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.trie.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="461.0" prefWidth="434.0" styleClass="mainFxmlClass" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.trie.FXMLController">
    <children>
       <VBox layoutY="14.0" prefHeight="461.0" prefWidth="434.0">
          <children>
             <HBox prefHeight="49.0" prefWidth="434.0">
                <children>
-                  <Label prefHeight="50.0" prefWidth="437.0" text="Trie Tree" textFill="#aeaeae">
+                  <Label prefHeight="50.0" prefWidth="437.0" text="Trie Tree" textFill="#696969">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
