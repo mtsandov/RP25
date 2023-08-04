@@ -29,22 +29,37 @@
                <children>
                   <TextField fx:id="txtField" prefHeight="32.0" prefWidth="174.0">
                      <HBox.margin>
-                        <Insets left="125.0" top="20.0" />
+                        <Insets left="50.0" top="32.0" />
                      </HBox.margin>
                   </TextField>
-               </children>
-            </HBox>
-            <HBox prefHeight="66.0" prefWidth="434.0">
-               <children>
-                  <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#buscarPalabra" text="Buscar">
+                  <VBox prefHeight="77.0" prefWidth="180.0">
+                     <children>
+                        <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#buscarPalabra" prefHeight="26.0" prefWidth="57.0" text="Buscar">
+                           <VBox.margin>
+                              <Insets left="60.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#insertarPalabra" prefHeight="26.0" prefWidth="58.0" text="Insertar">
+                           <VBox.margin>
+                              <Insets left="60.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" text="Eliminar">
+                           <VBox.margin>
+                              <Insets left="60.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
                      <HBox.margin>
-                        <Insets left="30.0" />
+                        <Insets />
                      </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" text="Insertar" />
-                  <Button mnemonicParsing="false" text="Eliminar" />
+                  </VBox>
                </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </HBox>
+            <HBox prefHeight="66.0" prefWidth="434.0" />
          </children>
       </VBox>
    </children>

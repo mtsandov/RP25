@@ -6,7 +6,9 @@ Put header here
  */
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -70,6 +72,33 @@ public class FXMLController implements Initializable {
          AlertBoxes.errorAlert("Fallo", "No se ha encontrado la palabra", "Inténte con otra palabra");
     }
 }
+    
+    @FXML
+    private void insertarPalabra(MouseEvent event){
+        String word = txtField.getText();
+        try(BufferedWriter bf= new BufferedWriter(new FileWriter("src\\main\\resources\\words.txt",true))){
+            if(word.isEmpty() || word == null){
+             throw new NullPointerException();
+         }
+             boolean verificador = trie.search(word);
+             if(verificador){
+             throw new RuntimeException();
+             }else{
+             String linea= word;
+             bf.newLine();
+             bf.write(linea);
+             trie.insert(word);
+             AlertBoxes.infoAlert("Exito!", "Se ha insertado la palabra :)", "Prueba con otra palabra");
+           }
+        }catch (IOException e2) {
+            AlertBoxes.errorAlert("Fallo", "No se ha podido insertar la palabra", "Inténte con otra palabra");
+        }catch (NullPointerException n) {
+            AlertBoxes.errorAlert("Error", "No puede dejar ningún campo de texto vacío", "Inténtelo nuevamente");
+        }catch (RuntimeException n) {
+            AlertBoxes.errorAlert("Fallo", "La palabra ya existe", "Inténtelo nuevamente");
+        }
+        
+    }
     
     
 

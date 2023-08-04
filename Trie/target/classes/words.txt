@@ -198,3 +198,7 @@ guerra
 fracaso
 sueño
 realidad
+
+maca
+llanta
+pistola
