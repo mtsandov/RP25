@@ -29,7 +29,7 @@ public class Tree<E> {
         return null;
     }
 
-    public void setRoot(E content) {
+    public void setRoot(String content) {
         this.root = new TreeNode<>(content);
     }
 
@@ -61,19 +61,20 @@ public class Tree<E> {
 //    }
 
      public boolean search(String word) {
-        TreeNode<E> current = root;
-        for (int i = 0; i < word.length(); i++) {
-            char character = word.charAt(i);
-            if (!current.getChildren().containsKey((E) Character.valueOf(character))) {
-                // Si no se encuentra un enlace para la letra actual, la palabra no está en el árbol
-                return false;
-            }
-            // Moverse al siguiente nodo
-            current = current.getChildren().get((E) Character.valueOf(character));
+    TreeNode<E> current = root;
+    for (int i = 0; i < word.length(); i++) {
+        char character = word.charAt(i);
+
+        if (!current.getChildren().containsKey((E) Character.valueOf(character))) {
+            // Si no se encuentra un enlace para la letra actual, la palabra no está en el árbol
+            return false;
         }
-        // Verificar si el último nodo es una hoja (es decir, si la palabra está en el árbol)
-        return current.isLeaf();
+        // Moverse al siguiente nodo
+        current = current.getChildren().get((E) Character.valueOf(character));
     }
+    // Verificar si el último nodo es una hoja y si la palabra está en el árbol
+    return current.getContent() != null && current.getContent().compareTo(word)==0;
+} 
     
     public void deleteWord(String word) {
         if (word == null || word.isEmpty()) {
@@ -118,43 +119,24 @@ public class Tree<E> {
     
     public void insert(String word) {
         TreeNode<E> current = root;
-        for (int i = 0; i < word.length(); i++) {
-            char character = word.charAt(i);
+        int wordSize = word.length();
+
+        for (int i = 0; i < wordSize; i++) {
+            char character = word.charAt(i);           
             // Si el nodo actual no tiene un enlace para el carácter actual, lo crea
-            if (!current.getChildren().containsKey(character)) {
-                current.getChildren().put((E) Character.valueOf(character), new TreeNode(character));
+            if (!current.getChildren().containsKey((E) Character.valueOf(character)) ) {   
+                    current.getChildren().put( (E) Character.valueOf(character), new TreeNode(String.valueOf(character)));
             }
-            // Se mueve al siguiente nodo
-            current = current.getChildren().get(character);
-        }
-        // Marca el último nodo como hoja e inserta la palabra
-        current.setLeaf(true);
-        current.setWord(word);
-    }
-    
-    
-    
-public Tree<E> getSubTree(String prefix) {
-        TreeNode<E> current = root;
-        for (int i = 0; i < prefix.length(); i++) {
-            char character = prefix.charAt(i);
-            if (!current.getChildren().containsKey((E) Character.valueOf(character))) {
-                // Si no se encuentra un enlace para la letra actual, el subárbol no existe
-                return null;
-            }
-            // Moverse al siguiente nodo
+            
+            if (i == wordSize - 1) {
+                current = current.getChildren().get((E) Character.valueOf(character));
+                    current.setContent(word);
+                    break;
+                }
+            
             current = current.getChildren().get((E) Character.valueOf(character));
         }
-
-        // Una vez que se encuentra el último nodo correspondiente al último carácter del prefix,
-        // se crea un nuevo árbol (subárbol) con la raíz en ese nodo
-        Tree<E> subTree = new Tree<>();
-        subTree.root = current;
-
-        return subTree;
     }
-
-
 
    //METODO PARA AUTOCOMPLETAR
     public List<String> autoComplete(String prefix) {
@@ -162,58 +144,56 @@ public Tree<E> getSubTree(String prefix) {
         TreeNode<E> current = root;
         for (int i = 0; i < prefix.length(); i++) {
             char character = prefix.charAt(i);
-            if (!current.getChildren().containsKey(character)) {
+            if (!current.getChildren().containsKey((E) Character.valueOf(character))) {
                 // Si no se encuentra un enlace para la letra actual, no hay palabras que autocompletar
                 return words;
             }
             // Moverse al siguiente nodo
-            current = current.getChildren().get(character);
+            current = current.getChildren().get((E) Character.valueOf(character));
         }
-
         // Si el prefijo existe en el árbol Trie, realizar recorrido DFS para autocompletar palabras
-        autoCompleteDFS(current, prefix, words);
-
-        return words;
-    }
-    
-    public List<String> inverseAutoComplete(String suffix) {
-        List<String> words = new ArrayList<>();
-        TreeNode<E> current = root;
-        int i = 0;
-        while (i< suffix.length()) {
-            char character = suffix.charAt(i);
-            if (!current.getChildren().containsKey(character)) {
-                // Si no se encuentra un enlace para la letra actual, no hay palabras que autocompletar
-                return words;
-            }
-            // Moverse al siguiente nodo
-            current = current.getChildren().get(character);
-            i++;
-        }
-
-        // Si el prefijo existe en el árbol Trie, realizar recorrido DFS para autocompletar palabras
-        autoCompleteDFS(current, suffix, words);
-
+        autoCompleteDFS(current, words);
         return words;
     }
 
     // Método auxiliar para realizar el recorrido DFS y autocompletar palabras
-    private void autoCompleteDFS(TreeNode<E> node, String currentWord, List<String> words) {
+    private void autoCompleteDFS(TreeNode<E> node, List<String> words) {
         // Si el nodo es una hoja, se agrega la palabra autocompletada a la lista de palabras
         if (node.isLeaf()) {
-            words.add(currentWord);
+            words.add(node.getContent());
         }
-
         // Recorrer todos los enlaces del nodo actual y llamar recursivamente para los nodos hijos
         for (TreeNode<E> child : node.getChildren().values()) {
-            E character = child.getContent();
-            autoCompleteDFS(child, currentWord + character.toString(), words);
+            autoCompleteDFS(child,  words);
         }
     }
+    
+//    
+//    
+//public List<String> inverseAutoComplete(String suffix) {
+//        List<String> words = new ArrayList<>();
+//        TreeNode<E> current = root;
+//        int i = 0;
+//        while (i< suffix.length()) {
+//            char character = suffix.charAt(i);
+//            if (!current.getChildren().containsKey(character)) {
+//                // Si no se encuentra un enlace para la letra actual, no hay palabras que autocompletar
+//                return words;
+//            }
+//            // Moverse al siguiente nodo
+//            current = current.getChildren().get(character);
+//            i++;
+//        }
+//
+//        // Si el prefijo existe en el árbol Trie, realizar recorrido DFS para autocompletar palabras
+//        autoCompleteDFS(current, suffix, words);
+//
+//        return words;
+//    }
 
 
 }
 
-    
-    
 
+    
+    

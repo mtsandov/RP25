@@ -34,7 +34,7 @@ public class Main {
          trie.deleteWord("orange"); 
          System.out.println("¿Existe 'orange' en el árbol Trie? " + trie.search("orange")); // Debería imprimir false
          
-         System.out.println("Autocompletar 'le': " + trie.inverseAutoComplete("le")); // Debería imprimir ['orange']
+//         System.out.println("Autocompletar 'le': " + trie.inverseAutoComplete("le")); // Debería imprimir ['orange']
          
     }
    
