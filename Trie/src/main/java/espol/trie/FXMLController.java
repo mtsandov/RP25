@@ -16,31 +16,31 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import tda.Tree;
+import tda.TreeNode;
 
 public class FXMLController implements Initializable {
     
-    @FXML
-    private Label lblOut;
     @FXML
     private TextField txtField;
     @FXML
     private Button searchButton;
     
-    @FXML
-    private void btnClickAction(ActionEvent event) {
-        lblOut.setText("Hello World!");
-    }
+    Tree<Character> trie = new Tree(new TreeNode("Root Node"));
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadTrieTree();
     }
 
     public void loadTrieTree(){
-        try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\com\\mycompany\\emojiapp\\words.txt"))) {
+        try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
-                
+                trie.insert(linea);
             }
         } catch (IOException ex) {
             System.out.println("no se pudieron cargar las palabras");
@@ -49,7 +49,28 @@ public class FXMLController implements Initializable {
         }
     }
     
-
+    
+    @FXML
+    private void buscarPalabra(MouseEvent event) {
+        String word = txtField.getText();
+         System.out.println(word);
+         try{
+         if(word.isEmpty() || word == null){
+             throw new NullPointerException();
+         }
+        } catch (NullPointerException n) {
+            AlertBoxes.errorAlert("Error", "No puede dejar ningún campo de texto vacío", "Inténtelo nuevamente");
+        }
+         
+         boolean verificador = trie.search(word);
+         
+         if(verificador){
+             AlertBoxes.infoAlert("Exito!", "Se ha encontrado la palabra :)", "Prueba con otra palabra");
+         }else {
+         AlertBoxes.errorAlert("Fallo", "No se ha encontrado la palabra", "Inténte con otra palabra");
+    }
 
     
+}
+
 }

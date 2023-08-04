@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-class TreeNode<E> {
+public class TreeNode<E> {
 
     private String content;
 

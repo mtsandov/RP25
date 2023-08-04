@@ -1,4 +1,4 @@
-package com.mycompany.emojiapp;
+package espol.trie;
 
 import java.util.Optional;
 

@@ -1,7 +1,7 @@
 tda\Tree.class
+espol\trie\AlertBoxes.class
 module-info.class
 tda\TreeNode.class
 espol\trie\MainApp.class
 espol\trie\FXMLController.class
 tda\Main.class
-com\mycompany\emojiapp\AlertBoxes.class
