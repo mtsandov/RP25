@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
 import tda.Tree;
 import tda.TreeNode;
 
@@ -29,6 +30,8 @@ public class FXMLController implements Initializable {
     @FXML
     private Button searchButton;
     
+    private AutoCompletionBinding<String> autoCompletionBinding;
+    
     Tree<Character> trie = new Tree(new TreeNode("Root Node"));
     
     
@@ -36,6 +39,7 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadTrieTree();
+    
     }
 
     public void loadTrieTree(){
