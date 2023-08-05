@@ -128,6 +128,11 @@ public class EstadisticasController implements Initializable {
         return cantidades;
     }
     
+     @FXML
+    private void regresar(MouseEvent event) throws IOException {        
+        MainApp.setRoot("primary","");
+   }
+ 
     
     public ArrayList<String> letras(){
         ArrayList<String>  letras = new ArrayList<>();
