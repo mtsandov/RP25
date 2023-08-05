@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import static java.lang.System.exit;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -36,14 +37,10 @@ public class FXMLController implements Initializable {
     
     Tree<Character> trie = new Tree(new TreeNode("Root Node"));
     
-    
-    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-        autoCompletarPalabra();
+    public void initialize(URL url, ResourceBundle rb) {      
         loadTrieTree();
-    
+        autoCompletarPalabra();
     }
 
     public void loadTrieTree(){
@@ -51,15 +48,10 @@ public class FXMLController implements Initializable {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 boolean verificador = trie.search(linea);
-                System.out.println(linea);
-                System.out.println(verificador);
                 if(!verificador){
                 trie.insert(linea);
                 }
             }
-            System.out.println("+");
-            System.out.println("+");
-            System.out.println("+");
         } catch (IOException ex) {
             System.out.println("no se pudieron cargar las palabras");
             
@@ -81,7 +73,7 @@ public class FXMLController implements Initializable {
         }
          
          boolean verificador = trie.search(word);
-         
+      
          if(verificador){
              AlertBoxes.infoAlert("Exito!", "Se ha encontrado la palabra :)", "Prueba con otra palabra");
          }else {
@@ -105,6 +97,7 @@ public class FXMLController implements Initializable {
              bf.write(linea);
              trie.insert(word);
              loadTrieTree();
+       
              AlertBoxes.infoAlert("Exito!", "Se ha insertado la palabra :)", "Prueba con otra palabra");
            }
         }catch (IOException e2) {
@@ -116,13 +109,17 @@ public class FXMLController implements Initializable {
         } 
     }
     
-//    @FXML
+    @FXML
     private void autoCompletarPalabra(){   
         loadTrieTree();
         String prefix = txtField.getText(); // obtengo el prefijo del campo de texto
         List<String> wordsCompleted = trie.autoComplete(prefix);
         TextFields.bindAutoCompletion(txtField, wordsCompleted);
-        
+    }
+    
+    @FXML
+    private void estadisticas() throws IOException{   
+        MainApp.setRoot("Estadisticas","");
     }
 
 }

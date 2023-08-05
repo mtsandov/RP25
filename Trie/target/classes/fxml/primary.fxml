@@ -27,11 +27,12 @@
             </HBox>
             <HBox prefHeight="59.0" prefWidth="434.0">
                <children>
-                  <TextField fx:id="txtField" prefHeight="32.0" prefWidth="174.0">
+                  <TextField fx:id="txtField" onMouseClicked="#autoCompletarPalabra" prefHeight="32.0" prefWidth="174.0">
                      <HBox.margin>
                         <Insets left="50.0" top="32.0" />
                      </HBox.margin>
                   </TextField>
+                  <Button mnemonicParsing="false" onMouseClicked="#estadisticas" prefHeight="26.0" prefWidth="37.0" text="Estadisticas" />
                   <VBox prefHeight="77.0" prefWidth="180.0">
                      <children>
                         <Button mnemonicParsing="false" onMouseClicked="#buscarPalabra" prefHeight="26.0" prefWidth="57.0" text="Buscar">
