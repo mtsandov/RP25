@@ -34,7 +34,7 @@
                   </TextField>
                   <VBox prefHeight="77.0" prefWidth="180.0">
                      <children>
-                        <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#buscarPalabra" prefHeight="26.0" prefWidth="57.0" text="Buscar">
+                        <Button mnemonicParsing="false" onMouseClicked="#buscarPalabra" prefHeight="26.0" prefWidth="57.0" text="Buscar">
                            <VBox.margin>
                               <Insets left="60.0" />
                            </VBox.margin>
@@ -44,7 +44,7 @@
                               <Insets left="60.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" text="Eliminar">
+                        <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" text="Eliminar">
                            <VBox.margin>
                               <Insets left="60.0" top="10.0" />
                            </VBox.margin>

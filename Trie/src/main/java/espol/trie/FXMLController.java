@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 import tda.Tree;
 import tda.TreeNode;
 
@@ -28,7 +30,7 @@ public class FXMLController implements Initializable {
     @FXML
     private TextField txtField;
     @FXML
-    private Button searchButton;
+    private Button deleteButton;
     
     private AutoCompletionBinding<String> autoCompletionBinding;
     
@@ -38,6 +40,8 @@ public class FXMLController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        autoCompletarPalabra();
         loadTrieTree();
     
     }
@@ -46,8 +50,16 @@ public class FXMLController implements Initializable {
         try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
+                boolean verificador = trie.search(linea);
+                System.out.println(linea);
+                System.out.println(verificador);
+                if(!verificador){
                 trie.insert(linea);
+                }
             }
+            System.out.println("+");
+            System.out.println("+");
+            System.out.println("+");
         } catch (IOException ex) {
             System.out.println("no se pudieron cargar las palabras");
             
@@ -92,6 +104,7 @@ public class FXMLController implements Initializable {
              bf.newLine();
              bf.write(linea);
              trie.insert(word);
+             loadTrieTree();
              AlertBoxes.infoAlert("Exito!", "Se ha insertado la palabra :)", "Prueba con otra palabra");
            }
         }catch (IOException e2) {
@@ -100,10 +113,16 @@ public class FXMLController implements Initializable {
             AlertBoxes.errorAlert("Error", "No puede dejar ningún campo de texto vacío", "Inténtelo nuevamente");
         }catch (RuntimeException n) {
             AlertBoxes.errorAlert("Fallo", "La palabra ya existe", "Inténtelo nuevamente");
-        }
-        
+        } 
     }
     
-    
+//    @FXML
+    private void autoCompletarPalabra(){   
+        loadTrieTree();
+        String prefix = txtField.getText(); // obtengo el prefijo del campo de texto
+        List<String> wordsCompleted = trie.autoComplete(prefix);
+        TextFields.bindAutoCompletion(txtField, wordsCompleted);
+        
+    }
 
 }
