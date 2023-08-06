@@ -7,6 +7,8 @@ Put header here
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,6 +22,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
@@ -31,7 +35,13 @@ public class FXMLController implements Initializable {
     @FXML
     private TextField txtField;
     @FXML
-    private Button deleteButton;
+    private Button eliminar;
+    @FXML
+    private Button estadisticas;
+    @FXML
+    private Button buscar;
+    @FXML
+    private Button insertar;
     
     private AutoCompletionBinding<String> autoCompletionBinding;
     
@@ -41,6 +51,11 @@ public class FXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {      
         loadTrieTree();
         autoCompletarPalabra();
+        try {
+            cargarBotones();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void loadTrieTree(){
@@ -120,6 +135,13 @@ public class FXMLController implements Initializable {
     @FXML
     private void estadisticas() throws IOException{   
         MainApp.setRoot("Estadisticas","");
+    }
+    
+    private void cargarBotones() throws FileNotFoundException{
+         estadisticas.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\estadisticas.png" ),20,20,true,false)));  
+         buscar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\buscar.png" ),20,20,true,false)));  
+         eliminar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\eliminar.png" ),20,20,true,false)));  
+         insertar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\insertar.png" ),20,20,true,false)));  
     }
 
 }

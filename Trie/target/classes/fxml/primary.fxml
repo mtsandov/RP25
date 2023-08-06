@@ -32,20 +32,20 @@
                         <Insets left="50.0" top="32.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" onMouseClicked="#estadisticas" prefHeight="26.0" prefWidth="37.0" text="Estadisticas" />
-                  <VBox prefHeight="77.0" prefWidth="180.0">
+                  <Button fx:id="estadisticas" mnemonicParsing="false" onMouseClicked="#estadisticas" prefHeight="26.0" prefWidth="29.0" />
+                  <VBox prefHeight="152.0" prefWidth="180.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#buscarPalabra" prefHeight="26.0" prefWidth="57.0" text="Buscar">
+                        <Button fx:id="buscar" mnemonicParsing="false" onMouseClicked="#buscarPalabra" prefHeight="26.0" prefWidth="32.0">
                            <VBox.margin>
                               <Insets left="60.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#insertarPalabra" prefHeight="26.0" prefWidth="58.0" text="Insertar">
+                        <Button fx:id="insertar" mnemonicParsing="false" onMouseClicked="#insertarPalabra" prefHeight="26.0" prefWidth="33.0">
                            <VBox.margin>
                               <Insets left="60.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" text="Eliminar">
+                        <Button fx:id="eliminar" mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0">
                            <VBox.margin>
                               <Insets left="60.0" top="10.0" />
                            </VBox.margin>

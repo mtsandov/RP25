@@ -24,7 +24,7 @@
             </Label>
          </children>
       </HBox>
-      <TableView fx:id="table" layoutX="14.0" layoutY="77.0" prefHeight="359.0" prefWidth="151.0">
+      <TableView fx:id="table" layoutX="141.0" layoutY="68.0" prefHeight="359.0" prefWidth="151.0">
         <columns>
           <TableColumn fx:id="columna1" prefWidth="75.0" text="Letras" />
           <TableColumn fx:id="columna2" prefWidth="75.0" text="Cantidad" />

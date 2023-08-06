@@ -31,10 +31,10 @@ public class Main {
         System.out.println("Autocompletar 'ora': " + trie.autoComplete("ora")); // Debería imprimir ['orange']
          System.out.println("Autocompletar 'h': " + trie.autoComplete("h")); // Debería imprimir ['orange']
          
-         trie.deleteWord("orange"); 
+//         trie.deleteWord("orange"); 
          System.out.println("¿Existe 'orange' en el árbol Trie? " + trie.search("orange")); // Debería imprimir false
-         
-//         System.out.println("Autocompletar 'le': " + trie.inverseAutoComplete("le")); // Debería imprimir ['orange']
+//         System.out.println("nodo de orange :"+ trie.getParentNode(trie.searchNode("orange")).getContent());
+         System.out.println("Autocompletar 'le': " + trie.autoCompleteBySuffix("ple")); // Debería imprimir ['orange']
          
     }
    
