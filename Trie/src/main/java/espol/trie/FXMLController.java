@@ -48,6 +48,8 @@ public class FXMLController implements Initializable {
     private Button check;
     @FXML
     private Button score;
+    @FXML
+    private Button hbox;
     
     private AutoCompletionBinding<String> autoCompletionBinding;
     

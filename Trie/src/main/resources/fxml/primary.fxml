@@ -75,7 +75,7 @@
                </children></HBox>
             <VBox prefHeight="111.0" prefWidth="434.0">
                <children>
-                  <HBox prefHeight="91.0" prefWidth="434.0" />
+                  <HBox fx:id="hbox" prefHeight="91.0" prefWidth="434.0" />
                   <HBox prefHeight="92.0" prefWidth="434.0">
                      <children>
                         <Label text="Puntos: " textFill="WHITE">
