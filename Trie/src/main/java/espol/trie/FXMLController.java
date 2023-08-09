@@ -42,6 +42,12 @@ public class FXMLController implements Initializable {
     private Button buscar;
     @FXML
     private Button insertar;
+    @FXML
+    private Button game;
+    @FXML
+    private Button check;
+    @FXML
+    private Button score;
     
     private AutoCompletionBinding<String> autoCompletionBinding;
     

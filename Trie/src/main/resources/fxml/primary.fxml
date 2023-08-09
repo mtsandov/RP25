@@ -60,7 +60,44 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="66.0" prefWidth="434.0" />
+            <HBox prefHeight="32.0" prefWidth="434.0">
+               <children>
+                  <Button fx:id="check" mnemonicParsing="false" text="Verificar">
+                     <HBox.margin>
+                        <Insets left="112.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="game" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="60.0" top="-27.0" />
+                     </HBox.margin>
+                  </Button>
+               </children></HBox>
+            <VBox prefHeight="111.0" prefWidth="434.0">
+               <children>
+                  <HBox prefHeight="91.0" prefWidth="434.0" />
+                  <HBox prefHeight="92.0" prefWidth="434.0">
+                     <children>
+                        <Label text="Puntos: " textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="30.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="score" text="0" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>
