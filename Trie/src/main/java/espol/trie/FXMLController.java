@@ -181,7 +181,7 @@ public class FXMLController implements Initializable {
             label.setText(String.valueOf(shuffledWord.charAt(i)));
             hbox.getChildren().add(label);
         }  
-        
+        LinkedList<String> scored_words = new LinkedList<>();
         System.out.println(selectedWord);
         check.setOnMouseClicked((MouseEvent e)->{
         String word = txtField.getText().toLowerCase();
@@ -190,20 +190,18 @@ public class FXMLController implements Initializable {
         for(int i = 0 ; i < shuffledWord.length() ; i++){
        if(!word.contains(String.valueOf(shuffledWord.charAt(i))) || word.length() != shuffledWord.length()){
            System.out.println(word);
-           System.out.println(word.length());
-           System.out.println(shuffledWord.length());
            throw new RuntimeException();
        }
       }
-        
         boolean verificador = trie.search(word);
-        if(verificador){
+        if(verificador && !scored_words.contains(word)){
             scores++;
             score.setText(String.valueOf(scores));
+            scored_words.add(word);
             AlertBoxes.infoAlert("Good!", "Se ha encontrado la palabra tienes 1 punto mas :)", "Prueba con otra palabra");
-        }
+        }else{throw new RuntimeException();}
         }catch( RuntimeException r){
-            AlertBoxes.errorAlert("Fallo", "La palabra no existe o no ha utilizado todos los caracteres correctamente", "Inténte con otra palabra");
+            AlertBoxes.errorAlert("Fallo", "Ya ingresaste esta palabra o no ha utilizado todos los caracteres correctamente", "Inténte con otra palabra");
         }
         
         });
