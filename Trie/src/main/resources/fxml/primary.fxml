@@ -62,14 +62,14 @@
             </HBox>
             <HBox prefHeight="32.0" prefWidth="434.0">
                <children>
-                  <Button fx:id="check" mnemonicParsing="false" text="Verificar">
+                  <Button fx:id="check" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0">
                      <HBox.margin>
-                        <Insets left="112.0" />
+                        <Insets left="120.0" />
                      </HBox.margin>
                   </Button>
                   <Button fx:id="game" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0">
                      <HBox.margin>
-                        <Insets bottom="10.0" left="53.0" top="-28.0" />
+                        <Insets bottom="10.0" left="65.0" top="-37.0" />
                      </HBox.margin>
                   </Button>
                </children></HBox>

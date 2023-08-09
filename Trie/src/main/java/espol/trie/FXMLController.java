@@ -99,7 +99,7 @@ public class FXMLController implements Initializable {
         }
          
          boolean verificador = trie.search(word);
-      
+         disableButtons();
          if(verificador){
              AlertBoxes.infoAlert("Exito!", "Se ha encontrado la palabra :)", "Prueba con otra palabra");
          }else {
@@ -123,7 +123,7 @@ public class FXMLController implements Initializable {
              bf.write(linea);
              trie.insert(word);
              loadTrieTree();
-       
+             disableButtons();
              AlertBoxes.infoAlert("Exito!", "Se ha insertado la palabra :)", "Prueba con otra palabra");
            }
         }catch (IOException e2) {
@@ -148,12 +148,19 @@ public class FXMLController implements Initializable {
         MainApp.setRoot("Estadisticas","");
     }
     
+    private void disableButtons(){
+        check.setVisible(false);
+        score.setVisible(false);
+        puntosLabel.setVisible(false);
+    }
+    
     private void cargarBotones() throws FileNotFoundException{
          estadisticas.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\estadisticas.png" ),20,20,true,false)));  
          buscar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\buscar.png" ),20,20,true,false)));  
          eliminar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\eliminar.png" ),20,20,true,false)));  
          insertar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\insertar.png" ),20,20,true,false)));
          game.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\game.png" ),20,20,true,false)));
+         check.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\check.png" ),20,20,true,false)));
     }
 
 }
