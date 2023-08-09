@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import tda.Tree;
@@ -47,11 +48,12 @@ public class FXMLController implements Initializable {
     @FXML
     private Button check;
     @FXML
-    private Button score;
+    private HBox hbox;
     @FXML
-    private Button hbox;
+    private Label score;
     @FXML
-    private Button puntosLabel;
+    private Label puntosLabel;
+    
     private AutoCompletionBinding<String> autoCompletionBinding;
     
     Tree<Character> trie = new Tree(new TreeNode("Root Node"));
@@ -150,7 +152,8 @@ public class FXMLController implements Initializable {
          estadisticas.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\estadisticas.png" ),20,20,true,false)));  
          buscar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\buscar.png" ),20,20,true,false)));  
          eliminar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\eliminar.png" ),20,20,true,false)));  
-         insertar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\insertar.png" ),20,20,true,false)));  
+         insertar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\insertar.png" ),20,20,true,false)));
+         game.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\game.png" ),20,20,true,false)));
     }
 
 }

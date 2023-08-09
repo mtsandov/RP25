@@ -69,7 +69,7 @@
                   </Button>
                   <Button fx:id="game" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0">
                      <HBox.margin>
-                        <Insets bottom="10.0" left="60.0" top="-27.0" />
+                        <Insets bottom="10.0" left="53.0" top="-28.0" />
                      </HBox.margin>
                   </Button>
                </children></HBox>
