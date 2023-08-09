@@ -15,6 +15,7 @@ import java.io.IOException;
 import static java.lang.System.exit;
 import java.net.URL;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
+import static org.controlsfx.glyphfont.FontAwesome.Glyph.RANDOM;
 import tda.Tree;
 import tda.TreeNode;
 
@@ -54,6 +56,9 @@ public class FXMLController implements Initializable {
     @FXML
     private Label puntosLabel;
     
+    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+    private static final Random RANDOM = new Random();
+    
     private AutoCompletionBinding<String> autoCompletionBinding;
     
     Tree<Character> trie = new Tree(new TreeNode("Root Node"));
@@ -62,6 +67,7 @@ public class FXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {      
         loadTrieTree();
         autoCompletarPalabra();
+        disableButtons();
         try {
             cargarBotones();
         } catch (FileNotFoundException ex) {
@@ -100,6 +106,7 @@ public class FXMLController implements Initializable {
          
          boolean verificador = trie.search(word);
          disableButtons();
+         hbox.getChildren().clear();
          if(verificador){
              AlertBoxes.infoAlert("Exito!", "Se ha encontrado la palabra :)", "Prueba con otra palabra");
          }else {
@@ -124,6 +131,7 @@ public class FXMLController implements Initializable {
              trie.insert(word);
              loadTrieTree();
              disableButtons();
+             hbox.getChildren().clear();
              AlertBoxes.infoAlert("Exito!", "Se ha insertado la palabra :)", "Prueba con otra palabra");
            }
         }catch (IOException e2) {
@@ -146,6 +154,43 @@ public class FXMLController implements Initializable {
     @FXML
     private void estadisticas() throws IOException{   
         MainApp.setRoot("Estadisticas","");
+    }
+    
+    @FXML
+    private void gameMode(MouseEvent event){
+        check.setVisible(true);
+        score.setVisible(true);
+        puntosLabel.setVisible(true);
+        score.setText(String.valueOf(0));
+        String word = txtField.getText().toLowerCase();
+        
+        game.setOnMouseClicked((MouseEvent e)->{
+        hbox.getChildren().clear();
+        int numberOfLabels = RANDOM.nextInt(3) + 4; // Generar un número aleatorio entre 4 y 6
+        for (int i = 0; i < numberOfLabels; i++) {
+            Label label = new Label();
+            label.setStyle("-fx-padding: 10px;" +
+                "-fx-font: bold 18px 'System'; -fx-text-fill: white;");
+            label.setText(randomLetter());
+            ;
+            hbox.getChildren().add(label);
+        }
+        });
+        
+        check.setOnMouseClicked((MouseEvent e)->{     
+        Integer scores = Integer.valueOf(score.getText());
+        boolean verificador = trie.search(word);
+        if(verificador){
+            scores++;
+            score.setText(String.valueOf(scores));
+        }
+        });
+        
+    }
+    
+    private String randomLetter() {
+        int index = RANDOM.nextInt(ALPHABET.length());
+        return Character.toString(ALPHABET.charAt(index));
     }
     
     private void disableButtons(){

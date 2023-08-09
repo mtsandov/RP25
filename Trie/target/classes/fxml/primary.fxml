@@ -67,9 +67,9 @@
                         <Insets left="120.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="game" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0">
+                  <Button fx:id="game" mnemonicParsing="false" onMouseClicked="#gameMode" prefHeight="25.0" prefWidth="30.0">
                      <HBox.margin>
-                        <Insets bottom="10.0" left="65.0" top="-36.0" />
+                        <Insets bottom="10.0" left="65.0" top="-37.0" />
                      </HBox.margin>
                   </Button>
                </children></HBox>
