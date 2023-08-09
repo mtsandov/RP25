@@ -12,8 +12,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import static java.lang.Math.random;
+import static java.lang.StrictMath.random;
 import static java.lang.System.exit;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -27,9 +30,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import java.util.Random;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
-import static org.controlsfx.glyphfont.FontAwesome.Glyph.RANDOM;
+
 import tda.Tree;
 import tda.TreeNode;
 
@@ -56,9 +60,10 @@ public class FXMLController implements Initializable {
     @FXML
     private Label puntosLabel;
     
-    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
-    private static final Random RANDOM = new Random();
+    private static final LinkedList<String> words = new LinkedList<>();
     
+    private static final Random RANDOM = new Random();
+    private  String letras = "";
     private AutoCompletionBinding<String> autoCompletionBinding;
     
     Tree<Character> trie = new Tree(new TreeNode("Root Node"));
@@ -82,6 +87,7 @@ public class FXMLController implements Initializable {
                 boolean verificador = trie.search(linea);
                 if(!verificador){
                 trie.insert(linea);
+                words.add(linea);
                 }
             }
         } catch (IOException ex) {
@@ -129,6 +135,7 @@ public class FXMLController implements Initializable {
              bf.newLine();
              bf.write(linea);
              trie.insert(word);
+             words.add(linea);
              loadTrieTree();
              disableButtons();
              hbox.getChildren().clear();
@@ -162,35 +169,64 @@ public class FXMLController implements Initializable {
         score.setVisible(true);
         puntosLabel.setVisible(true);
         score.setText(String.valueOf(0));
-        String word = txtField.getText().toLowerCase();
-        
-        game.setOnMouseClicked((MouseEvent e)->{
         hbox.getChildren().clear();
-        int numberOfLabels = RANDOM.nextInt(3) + 4; // Generar un número aleatorio entre 4 y 6
-        for (int i = 0; i < numberOfLabels; i++) {
+            int randomIndex = RANDOM.nextInt(words.size());
+            String selectedWord = words.get(randomIndex);
+            String shuffledWord = shuffleWord(selectedWord);
+            
+        for (int i = 0; i < shuffledWord.length(); i++) {
             Label label = new Label();
             label.setStyle("-fx-padding: 10px;" +
                 "-fx-font: bold 18px 'System'; -fx-text-fill: white;");
-            label.setText(randomLetter());
-            ;
+            label.setText(String.valueOf(shuffledWord.charAt(i)));
             hbox.getChildren().add(label);
-        }
-        });
+        }  
         
-        check.setOnMouseClicked((MouseEvent e)->{     
+        System.out.println(selectedWord);
+        check.setOnMouseClicked((MouseEvent e)->{
+        String word = txtField.getText().toLowerCase();
         Integer scores = Integer.valueOf(score.getText());
+        try{
+        for(int i = 0 ; i < shuffledWord.length() ; i++){
+       if(!word.contains(String.valueOf(shuffledWord.charAt(i))) || word.length() != shuffledWord.length()){
+           System.out.println(word);
+           System.out.println(word.length());
+           System.out.println(shuffledWord.length());
+           throw new RuntimeException();
+       }
+      }
+        
         boolean verificador = trie.search(word);
         if(verificador){
             scores++;
             score.setText(String.valueOf(scores));
+            AlertBoxes.infoAlert("Good!", "Se ha encontrado la palabra tienes 1 punto mas :)", "Prueba con otra palabra");
         }
+        }catch( RuntimeException r){
+            AlertBoxes.errorAlert("Fallo", "La palabra no existe o no ha utilizado todos los caracteres correctamente", "Inténte con otra palabra");
+        }
+        
         });
         
     }
     
-    private String randomLetter() {
-        int index = RANDOM.nextInt(ALPHABET.length());
-        return Character.toString(ALPHABET.charAt(index));
+    private String randomLetter(String word) {
+        int index = RANDOM.nextInt(word.length());
+        return Character.toString(word.charAt(index));
+    }
+    
+    private static String shuffleWord(String word) {
+        char[] characters = word.toCharArray();
+        Random random = new Random();
+
+        for (int i = 0; i < characters.length; i++) {
+            int j = random.nextInt(characters.length);
+            char temp = characters[i];
+            characters[i] = characters[j];
+            characters[j] = temp;
+        }
+
+        return new String(characters);
     }
     
     private void disableButtons(){
