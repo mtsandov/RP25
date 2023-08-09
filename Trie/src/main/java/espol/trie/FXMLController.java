@@ -163,17 +163,20 @@ public class FXMLController implements Initializable {
         MainApp.setRoot("Estadisticas","");
     }
     
-    @FXML
-    private void gameMode(MouseEvent event){
+    private void initialize_nodes(){
         check.setVisible(true);
         score.setVisible(true);
         puntosLabel.setVisible(true);
         score.setText(String.valueOf(0));
         hbox.getChildren().clear();
-            int randomIndex = RANDOM.nextInt(words.size());
-            String selectedWord = words.get(randomIndex);
-            String shuffledWord = shuffleWord(selectedWord);
-            
+    }
+    
+    @FXML
+    private void gameMode(MouseEvent event){
+        initialize_nodes();
+        int randomIndex = RANDOM.nextInt(words.size());
+        String selectedWord = words.get(randomIndex);
+        String shuffledWord = shuffleWord(selectedWord); 
         for (int i = 0; i < shuffledWord.length(); i++) {
             Label label = new Label();
             label.setStyle("-fx-padding: 10px;" +

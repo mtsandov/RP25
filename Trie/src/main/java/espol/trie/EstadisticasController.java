@@ -38,7 +38,7 @@ public class EstadisticasController implements Initializable {
     private TableColumn<Data, Integer> columna2;
     
     
-    Integer num_palabras =0;
+    Integer num_palabras = 0;
     /**
      * Initializes the controller class.
      */

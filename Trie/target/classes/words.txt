@@ -345,3 +345,5 @@ roma
 cien
 copo
 buen
+ramo
+mora
