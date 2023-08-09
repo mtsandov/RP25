@@ -50,7 +50,8 @@ public class FXMLController implements Initializable {
     private Button score;
     @FXML
     private Button hbox;
-    
+    @FXML
+    private Button puntosLabel;
     private AutoCompletionBinding<String> autoCompletionBinding;
     
     Tree<Character> trie = new Tree(new TreeNode("Root Node"));

@@ -78,7 +78,7 @@
                   <HBox fx:id="hbox" prefHeight="91.0" prefWidth="434.0" />
                   <HBox prefHeight="92.0" prefWidth="434.0">
                      <children>
-                        <Label text="Puntos: " textFill="WHITE">
+                        <Label fx:id="puntosLabel" text="Puntos: " textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
