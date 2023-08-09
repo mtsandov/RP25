@@ -77,7 +77,7 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void buscarPalabra(MouseEvent event) {
-        String word = txtField.getText();
+        String word = txtField.getText().toLowerCase();
          System.out.println(word);
          try{
          if(word.isEmpty() || word == null){
@@ -98,7 +98,7 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void insertarPalabra(MouseEvent event){
-        String word = txtField.getText();
+        String word = txtField.getText().toLowerCase();
         try(BufferedWriter bf= new BufferedWriter(new FileWriter("src\\main\\resources\\words.txt",true))){
             if(word.isEmpty() || word == null){
              throw new NullPointerException();
@@ -127,7 +127,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void autoCompletarPalabra(){   
         loadTrieTree();
-        String prefix = txtField.getText(); // obtengo el prefijo del campo de texto
+        String prefix = txtField.getText().toLowerCase(); // obtengo el prefijo del campo de texto
         List<String> wordsCompleted = trie.autoComplete(prefix);
         TextFields.bindAutoCompletion(txtField, wordsCompleted);
     }
