@@ -11,7 +11,6 @@ public class Main {
         trie.insert("helo");
         trie.insert("hipo");
         trie.insert("hola");
-        trie.insert("s");
         trie.insert("apple");
         trie.insert("app");
         trie.insert("banana");
@@ -39,7 +38,10 @@ public class Main {
          System.out.println("¿Existe 'orange' en el árbol Trie? " + trie.search("orange")); // Debería imprimir false
 //         System.out.println("nodo de orange :"+ trie.getParentNode(trie.searchNode("orange")).getContent());
 //         System.out.println("Autocompletar 'le': " + trie.autoCompleteBySuffix("ple")); // Debería imprimir ['orange']
-        System.out.println(trie.searchSimilarWords("mora",2));
+        System.out.println(trie.getAllLeafWords());
+        System.out.println("Porcentajde de similitud entre mora y morado: " + trie.findSimilarity("mora", "morado"));
+        
+        
     }
    
     

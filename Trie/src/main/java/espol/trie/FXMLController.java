@@ -1,9 +1,4 @@
 package espol.trie;
-/*
-Put header here
-
-
- */
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -267,15 +262,22 @@ public class FXMLController implements Initializable {
     private void fillTable(){
         table.setVisible(true);
         tableTwo.setVisible(true);
-        ObservableList<Object> data = FXCollections.observableArrayList();
+        ObservableList<Object> prefix_data = FXCollections.observableArrayList();
+        ObservableList<Object> aprox_data = FXCollections.observableArrayList();
         column1.setCellValueFactory(new PropertyValueFactory<>("character"));
         column2.setCellValueFactory(new PropertyValueFactory<>("character"));
-        data.clear();
+        prefix_data.clear();
         String word = txtField.getText().toLowerCase();
         for(String words : trie.autoComplete(word)){
-            data.add(new Data("",words));
+            prefix_data.add(new Data("",words));
         }
-        table.setItems(data);
+        for(String palabra : trie.getAllLeafWords()){
+            if(trie.findSimilarity(word, palabra) > 0.50){
+                aprox_data.add(new Data(palabra));
+            }
+        }
+        table.setItems(prefix_data);
+        tableTwo.setItems(aprox_data);
       
     }
     

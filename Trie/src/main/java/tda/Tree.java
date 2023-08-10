@@ -39,29 +39,6 @@ private List<TreeNode<E>> leaves = new ArrayList<>(); // Lista para almacenar la
         return root.getChildren().isEmpty();
     }
 
-//    public boolean searchWord(String word) {
-//        if (word == null || word.isEmpty()) {
-//            return false;
-//        }
-//        return searchWord(root, word, 0);
-//    }
-
-//    private boolean searchWord(TreeNode<E> node, String word, int index) {
-//        if (node == null) {
-//            return false;
-//        }
-//        if (index == word.length()) {
-//            return node.getContent() != null;
-//        }
-//        char ch = word.charAt(index);
-//        return searchWord(node.getChildren().get(ch), word, index + 1); //REVISAR LINEA, POSIBLE EXCEPCION 
-//        //O ERROR - get(ch) devuelve el valor asociado a la clave ch.
-//        //Si el node que es el nodo actual es null no existe devuelve false.
-//        //Se llega al final de la palabra y el node tiene contenido devuelve true ya que la palabra existe.
-//        //Se hace recursion sabiendo que quedan caracteres por recorrer, se busca entre los hijos del node.
-//        //Si en los hijos no se encuentra el siguiente caracter, devuelve false porque no existe la palabra.
-//    }
-
      public boolean search(String word) {
     TreeNode<E> current = root;
     for (int i = 0; i < word.length(); i++) {
@@ -206,55 +183,64 @@ private List<TreeNode<E>> leaves = new ArrayList<>(); // Lista para almacenar la
     return current;
 } 
      
- 
- // Método para buscar palabras similares en el Trie utilizando la distancia de Levenshtein
-    public List<String> searchSimilarWords(String word, int maxDistance) {
-        List<String> similarWords = new ArrayList<>();
-        searchSimilarWords(root, word, maxDistance, new StringBuilder(), similarWords);
-        return similarWords;
+     // Método para recorrer todas las hojas del Trie
+    public List<String> getAllLeafWords() {
+        List<String> leafWords = new ArrayList<>();
+        getAllLeafWords(root, leafWords);
+        return leafWords;
     }
 
-    // Método auxiliar para buscar palabras similares en el Trie utilizando la distancia de Levenshtein
-    private void searchSimilarWords(TreeNode<E> node, String targetWord, int maxDistance,
-                                   StringBuilder currentWord, List<String> similarWords) {
+    // Método auxiliar para recorrer todas las hojas del Trie
+    private void getAllLeafWords(TreeNode<E> node, List<String> leafWords) {
         if (node.isLeaf()) {
-            String word = currentWord.toString();
-            int distance = calculateLevenshteinDistance(word, targetWord);
-
-            if (distance <= maxDistance) {
-                similarWords.add(word);
-            }
+            leafWords.add(node.getContent());
+            return;
         }
-
         // Recorrer todos los enlaces del nodo actual y llamar recursivamente para los nodos hijos
         for (TreeNode<E> child : node.getChildren().values()) {
-            currentWord.append( child.getContent());
-            searchSimilarWords(child, targetWord, maxDistance, currentWord, similarWords);
-            currentWord.deleteCharAt(currentWord.length() - 1);
+            getAllLeafWords(child, leafWords);
         }
+    }
+    
+     public double findSimilarity(String x, String y) {
+        if (x == null || y == null) {
+            throw new IllegalArgumentException("Strings must not be null");
+        }
+        double maxLength = Double.max(x.length(), y.length());
+        if (maxLength > 0) {
+            // opcionalmente ignora el caso si es necesario
+            return (maxLength - getLevenshteinDistance(x, y)) / maxLength;
+        }
+        return 1.0;
     }
 
     // Método para calcular la distancia de Levenshtein entre dos cadenas de caracteres
-    private int calculateLevenshteinDistance(String str1, String str2) {
-        int[][] dp = new int[str1.length() + 1][str2.length() + 1];
-
-        for (int i = 0; i <= str1.length(); i++) {
-            dp[i][0] = i;
+     public int getLevenshteinDistance(String X, String Y)
+    {
+        int m = X.length();
+        int n = Y.length();
+ 
+        int[][] T = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            T[i][0] = i;
         }
-
-        for (int j = 0; j <= str2.length(); j++) {
-            dp[0][j] = j;
+        for (int j = 1; j <= n; j++) {
+            T[0][j] = j;
         }
-
-        for (int i = 1; i <= str1.length(); i++) {
-            for (int j = 1; j <= str2.length(); j++) {
-                int cost = (str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1;
-                dp[i][j] = Math.min(Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1), dp[i - 1][j - 1] + cost);
+ 
+        int cost;
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                cost = X.charAt(i - 1) == Y.charAt(j - 1) ? 0: 1;
+                T[i][j] = Integer.min(Integer.min(T[i - 1][j] + 1, T[i][j - 1] + 1),
+                        T[i - 1][j - 1] + cost);
             }
         }
-
-        return dp[str1.length()][str2.length()];
+        return T[m][n];
     }
+     
+    
+ 
 
 }
 

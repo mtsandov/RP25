@@ -18,6 +18,11 @@ public class Data {
         this.number = number;
     }
     
+    public Data(String character ) {
+        this.character1 = character;
+      
+    }
+    
     public Data(String character1, String character2) {
         this.character1 = character1;
         this.character1 = character2;
