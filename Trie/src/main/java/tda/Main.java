@@ -16,6 +16,10 @@ public class Main {
         trie.insert("app");
         trie.insert("banana");
         trie.insert("orange");
+        trie.insert("mora");
+        trie.insert("morado");
+        trie.insert("morada");
+        trie.insert("morador");
         
         System.out.println(trie.search("orange"));
         
@@ -34,8 +38,8 @@ public class Main {
 //         trie.deleteWord("orange"); 
          System.out.println("¿Existe 'orange' en el árbol Trie? " + trie.search("orange")); // Debería imprimir false
 //         System.out.println("nodo de orange :"+ trie.getParentNode(trie.searchNode("orange")).getContent());
-         System.out.println("Autocompletar 'le': " + trie.autoCompleteBySuffix("ple")); // Debería imprimir ['orange']
-         
+//         System.out.println("Autocompletar 'le': " + trie.autoCompleteBySuffix("ple")); // Debería imprimir ['orange']
+//        System.out.println(trie.findSimilarity("mora", "morado"));
     }
    
     

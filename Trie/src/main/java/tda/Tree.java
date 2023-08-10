@@ -1,14 +1,15 @@
 package tda;
 
+//import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 public class Tree<E> {
 
-    private TreeNode<E> root;
+private TreeNode<E> root;
     
-private List<TreeNode<E>> leaves = new ArrayList<>();; // Lista para almacenar las hojas
+private List<TreeNode<E>> leaves = new ArrayList<>(); // Lista para almacenar las hojas
 
     public Tree() {
         this.root = null;
@@ -206,63 +207,15 @@ private List<TreeNode<E>> leaves = new ArrayList<>();; // Lista para almacenar l
 } 
      
  
+//    public double findSimilarity(String x, String y) {
+// 
+//        double maxLength = Double.max(x.length(), y.length());
+//        if (maxLength > 0) {
+//            // opcionalmente ignora el caso si es necesario
+//            return (maxLength - StringUtils.getLevenshteinDistance(x, y)) / maxLength;
+//        }
+//        return 1.0;
+//    }
  
-    // Método para encontrar nodos que contengan un sufijo dado
-    private List<TreeNode<E>> findNodesWithSuffix(String suffix) {
-        List<TreeNode<E>> nodesWithSuffix = new ArrayList<>();
-        for (TreeNode<E> leaf : leaves) {
-            TreeNode<E> current = leaf;
-            int index = suffix.length() - 1;
-
-            // Verificar si el sufijo existe en el árbol Trie a partir de esta hoja
-            while (!current.getContent().isEmpty()) {
-                char character = suffix.charAt(index);
-                if (!current.getChildren().containsKey((E) Character.valueOf(character))) {
-                    break;
-                }
-                current = getParentNode(current);
-                index--;
-            }
-
-            if (index < 0) {
-                // Si el sufijo se encontró en el árbol Trie a partir de esta hoja, agregar el nodo a la lista
-                nodesWithSuffix.add(leaf);
-            }
-        }
-        return nodesWithSuffix;
-    }
-
-    // Método para autocompletar palabras a partir de un sufijo
-    public List<String> autoCompleteBySuffix(String suffix) {
-        List<String> words = new ArrayList<>();
-        List<TreeNode<E>> nodesWithSuffix = findNodesWithSuffix(suffix);
-
-        // Realizar recorrido DFS desde cada nodo que tenga el sufijo para autocompletar palabras
-        for (TreeNode<E> node : nodesWithSuffix) {
-            autoCompleteBySuffixDFS(node, words, new StringBuilder(suffix));
-        }
-
-        return words;
-    }
-
-    // Método auxiliar para realizar el recorrido DFS desde las hojas para autocompletar palabras a partir de un sufijo
-    private void autoCompleteBySuffixDFS(TreeNode<E> node, List<String> words, StringBuilder currentWord) {
-        if (node.isLeaf()) {
-            // Si el nodo es una hoja, se agrega la palabra autocompletada a la lista de palabras
-            words.add(currentWord.reverse().toString());
-            currentWord.reverse();
-        }
-
-        // Recorrer todos los enlaces del nodo actual y llamar recursivamente para los nodos padres
-        for (TreeNode<E> child : node.getChildren().values()) {
-            currentWord.append( child.getContent());
-            autoCompleteBySuffixDFS(child, words, currentWord);
-            currentWord.deleteCharAt(currentWord.length() - 1);
-        }
-    }
-     
-
-     
-
 }
 

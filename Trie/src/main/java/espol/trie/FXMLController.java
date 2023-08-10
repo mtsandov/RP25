@@ -31,9 +31,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import java.util.Random;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
-
 import tda.Tree;
 import tda.TreeNode;
 
@@ -54,11 +58,20 @@ public class FXMLController implements Initializable {
     @FXML
     private Button check;
     @FXML
+    private Button fillTable;
+    @FXML
     private HBox hbox;
     @FXML
     private Label score;
     @FXML
     private Label puntosLabel;
+    @FXML
+    private TableView table;
+    @FXML
+    private TableColumn column1;
+    @FXML
+    private TableColumn column2;
+    
     
     private static final LinkedList<String> words = new LinkedList<>();
     
@@ -72,7 +85,7 @@ public class FXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {      
         loadTrieTree();
         autoCompletarPalabra();
-        disableButtons();
+        disableButtons(); 
         try {
             cargarBotones();
         } catch (FileNotFoundException ex) {
@@ -234,6 +247,7 @@ public class FXMLController implements Initializable {
         check.setVisible(false);
         score.setVisible(false);
         puntosLabel.setVisible(false);
+        table.setVisible(false);
     }
     
     private void cargarBotones() throws FileNotFoundException{
@@ -243,6 +257,24 @@ public class FXMLController implements Initializable {
          insertar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\insertar.png" ),20,20,true,false)));
          game.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\game.png" ),20,20,true,false)));
          check.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\check.png" ),20,20,true,false)));
+         fillTable.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\table.png" ),20,20,true,false)));
     }
+    
+    @FXML
+    private void fillTable(){
+        table.setVisible(true);
+        ObservableList<Object> data = FXCollections.observableArrayList();
+        column1.setCellValueFactory(new PropertyValueFactory<>("character"));
+        column2.setCellValueFactory(new PropertyValueFactory<>("character"));
+        data.clear();
+        String word = txtField.getText().toLowerCase();
+        for(String words : trie.autoComplete(word)){
+            data.add(new Data("",words));
+        }
+        table.setItems(data);
+      
+    }
+    
+    
 
 }

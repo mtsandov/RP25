@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+
 /**
  * FXML Controller class
  *
@@ -79,12 +80,6 @@ public class EstadisticasController implements Initializable {
                 
         );
     }    
-    
-    
-    @FXML
-    private void registrar(MouseEvent event) {        
-
-   }
     
     public int cantidad_palabras(){
         try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {

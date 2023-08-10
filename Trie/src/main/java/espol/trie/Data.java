@@ -9,20 +9,26 @@ package espol.trie;
  * @author wayar
  */
 public class Data {
-    private String character;
+    private String character1;
+    private String character2;
     private int number;
 
     public Data(String character, int number) {
-        this.character = character;
+        this.character1 = character;
         this.number = number;
+    }
+    
+    public Data(String character1, String character2) {
+        this.character1 = character1;
+        this.character1 = character2;
     }
 
     public String getCharacter() {
-        return character;
+        return character1;
     }
 
     public void setCharacter(String character) {
-        this.character = character;
+        this.character1 = character;
     }
 
     public int getNumber() {
