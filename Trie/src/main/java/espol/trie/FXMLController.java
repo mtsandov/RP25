@@ -250,6 +250,7 @@ public class FXMLController implements Initializable {
         score.setVisible(false);
         puntosLabel.setVisible(false);
         table.setVisible(false);
+        tableTwo.setVisible(false);
     }
     
     private void cargarBotones() throws FileNotFoundException{
@@ -265,13 +266,14 @@ public class FXMLController implements Initializable {
     @FXML
     private void fillTable(){
         table.setVisible(true);
+        tableTwo.setVisible(true);
         ObservableList<Object> data = FXCollections.observableArrayList();
         column1.setCellValueFactory(new PropertyValueFactory<>("character"));
         column2.setCellValueFactory(new PropertyValueFactory<>("character"));
         data.clear();
         String word = txtField.getText().toLowerCase();
         for(String words : trie.autoComplete(word)){
-            data.add(new Data("s",words));
+            data.add(new Data("",words));
         }
         table.setItems(data);
       

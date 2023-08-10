@@ -124,9 +124,9 @@
                               <Insets />
                            </HBox.margin>
                         </TableView>
-                        <Button fx:id="fillTable" mnemonicParsing="false" onMouseClicked="#fillTable" prefHeight="26.0" prefWidth="86.0" text="Tabla">
+                        <Button fx:id="fillTable" mnemonicParsing="false" onMouseClicked="#fillTable" prefHeight="26.0" prefWidth="87.0" text="Tablas">
                            <HBox.margin>
-                              <Insets left="5.0" top="-110.0" />
+                              <Insets left="2.0" top="-110.0" />
                            </HBox.margin>
                         </Button>
                      </children>
