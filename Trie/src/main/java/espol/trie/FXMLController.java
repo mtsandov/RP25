@@ -68,6 +68,8 @@ public class FXMLController implements Initializable {
     @FXML
     private TableView table;
     @FXML
+    private TableView tableTwo;
+    @FXML
     private TableColumn column1;
     @FXML
     private TableColumn column2;
@@ -269,7 +271,7 @@ public class FXMLController implements Initializable {
         data.clear();
         String word = txtField.getText().toLowerCase();
         for(String words : trie.autoComplete(word)){
-            data.add(new Data("",words));
+            data.add(new Data("s",words));
         }
         table.setItems(data);
       
