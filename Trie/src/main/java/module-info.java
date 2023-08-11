@@ -5,7 +5,7 @@ module espol {
     requires controlsfx;
     requires javafx.base;
     requires javafx.graphics;
-    requires org.apache.commons.lang3;
+
     
     opens espol.trie to javafx.fxml;
     opens org.apache.commons.lang3 to espol;

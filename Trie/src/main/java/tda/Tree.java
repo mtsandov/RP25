@@ -96,6 +96,29 @@ private List<TreeNode<E>> leaves = new ArrayList<>(); // Lista para almacenar la
         lastNode.setContent(null);
     }
     
+    public boolean eliminarPalabra(String word){
+         TreeNode<E> current = root;
+        int wordSize = word.length();
+
+        for (int i = 0; i < wordSize; i++) {
+            char character = word.charAt(i);           
+            // Si el nodo actual no tiene un enlace para el carácter actual, lo crea
+            if (!current.getChildren().containsKey( Character.valueOf(character)) ) {   
+                    return false;
+            }
+            
+            if (i == wordSize - 2) {
+                   current = current.getChildren().get((E) Character.valueOf(character));
+                    current.getChildren().clear();
+                    System.out.println(current.getChildren());
+                    return true;
+                }
+            
+            current = current.getChildren().get( Character.valueOf(character));
+    }
+        return false;
+  }
+    
     public void insert(String word) {
         TreeNode<E> current = root;
         int wordSize = word.length();

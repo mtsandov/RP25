@@ -152,10 +152,16 @@ public class FXMLController implements Initializable {
              AlertBoxes.infoAlert("Exito!", "Se ha insertado la palabra :)", "Prueba con otra palabra");
            }
         }catch (IOException e2) {
+            disableButtons();
+         hbox.getChildren().clear();
             AlertBoxes.errorAlert("Fallo", "No se ha podido insertar la palabra", "Inténte con otra palabra");
         }catch (NullPointerException n) {
+            disableButtons();
+         hbox.getChildren().clear();
             AlertBoxes.errorAlert("Error", "No puede dejar ningún campo de texto vacío", "Inténtelo nuevamente");
         }catch (RuntimeException n) {
+            disableButtons();
+         hbox.getChildren().clear();
             AlertBoxes.errorAlert("Fallo", "La palabra ya existe", "Inténtelo nuevamente");
         } 
     }
@@ -183,6 +189,8 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void gameMode(MouseEvent event){
+        table.setVisible(false);
+        tableTwo.setVisible(false);
         initialize_nodes();
         int randomIndex = RANDOM.nextInt(words.size());
         String selectedWord = words.get(randomIndex);
@@ -260,6 +268,10 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void fillTable(){
+        check.setVisible(false);
+        score.setVisible(false);
+        puntosLabel.setVisible(false);
+        hbox.getChildren().clear();
         table.setVisible(true);
         tableTwo.setVisible(true);
         ObservableList<Object> prefix_data = FXCollections.observableArrayList();
