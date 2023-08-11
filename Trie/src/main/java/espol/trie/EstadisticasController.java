@@ -17,10 +17,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+
 
 
 /**
@@ -84,7 +83,7 @@ public class EstadisticasController implements Initializable {
     public int cantidad_palabras(){
         try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
             String linea;
-            while ((linea = bf.readLine()) != null) {
+            while ((linea = bf.readLine()) != null && !linea.equals("") ){
                 num_palabras++;
             }
         } catch (IOException ex) {
@@ -92,6 +91,7 @@ public class EstadisticasController implements Initializable {
             
             ex.printStackTrace();
         }
+        System.out.println(num_palabras);
         return num_palabras;
     }
     
@@ -102,7 +102,7 @@ public class EstadisticasController implements Initializable {
         }
         try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
             String linea;
-            while ((linea = bf.readLine()) != null) {
+            while ((linea = bf.readLine()) != null && !linea.equals("")){
                 Character character = linea.charAt(0);
                 int indice = 0;
                 for(String letra: letras()){

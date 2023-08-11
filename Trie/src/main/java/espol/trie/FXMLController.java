@@ -133,7 +133,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void insertarPalabra(MouseEvent event){
         String word = txtField.getText().toLowerCase();
-        try(BufferedWriter bf= new BufferedWriter(new FileWriter("src\\main\\resources\\words.txt",true))){
+        try(BufferedWriter bf = new BufferedWriter(new FileWriter("src\\main\\resources\\words.txt",true))){
             if(word.isEmpty() || word == null){
              throw new NullPointerException();
          }
@@ -223,10 +223,8 @@ public class FXMLController implements Initializable {
         }else{throw new RuntimeException();}
         }catch( RuntimeException r){
             AlertBoxes.errorAlert("Fallo", "Ya ingresaste esta palabra o no ha utilizado todos los caracteres correctamente", "Inténte con otra palabra");
-        }
-        
+        }  
         });
-        
     }
     
     private String randomLetter(String word) {
@@ -237,14 +235,12 @@ public class FXMLController implements Initializable {
     private static String shuffleWord(String word) {
         char[] characters = word.toCharArray();
         Random random = new Random();
-
         for (int i = 0; i < characters.length; i++) {
             int j = random.nextInt(characters.length);
             char temp = characters[i];
             characters[i] = characters[j];
             characters[j] = temp;
         }
-
         return new String(characters);
     }
     
@@ -290,9 +286,37 @@ public class FXMLController implements Initializable {
         }
         table.setItems(prefix_data);
         tableTwo.setItems(aprox_data);
-      
     }
     
+    @FXML 
+    private void deleteWord(){
+        String word = txtField.getText().toLowerCase();
+         try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
+             List<String> lineas = new LinkedList<>();
+            String linea;
+            while ((linea = bf.readLine()) != null) {
+                if(!linea.equals(word)){
+                    lineas.add(linea);
+                }
+            }
+            trie.eliminarPalabra(word);
+            
+            bf.close();
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\main\\resources\\words.txt"));
+            for (String nuevaLinea : lineas) {
+                writer.write(nuevaLinea);
+                writer.newLine();
+            }
+
+            writer.close();
+
+        } catch (IOException ex) {
+            System.out.println("no se pudieron cargar las palabras");
+            
+            ex.printStackTrace();
+        } 
+    }
     
 
 }

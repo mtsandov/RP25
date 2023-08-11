@@ -347,8 +347,10 @@ copo
 buen
 ramo
 mora
-car
 cat
 morado
-morador
 morada
+morador
+pichincha
+batalla
+batallar

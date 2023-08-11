@@ -27,7 +27,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="59.0" prefWidth="434.0">
+            <HBox prefHeight="152.0" prefWidth="434.0">
                <children>
                   <TextField fx:id="txtField" onMouseClicked="#autoCompletarPalabra" prefHeight="32.0" prefWidth="174.0">
                      <HBox.margin>
@@ -35,11 +35,11 @@
                      </HBox.margin>
                   </TextField>
                   <Button fx:id="estadisticas" mnemonicParsing="false" onMouseClicked="#estadisticas" prefHeight="26.0" prefWidth="29.0" />
-                  <VBox prefHeight="152.0" prefWidth="180.0">
+                  <VBox prefHeight="67.0" prefWidth="180.0">
                      <children>
                         <Button fx:id="buscar" mnemonicParsing="false" onMouseClicked="#buscarPalabra" prefHeight="25.0" prefWidth="86.0" text="Buscar">
                            <VBox.margin>
-                              <Insets left="60.0" />
+                              <Insets left="60.0" top="-15.0" />
                            </VBox.margin>
                         </Button>
                         <Button fx:id="insertar" mnemonicParsing="false" onMouseClicked="#insertarPalabra" prefHeight="25.0" prefWidth="87.0" text="Insertar">
@@ -47,7 +47,7 @@
                               <Insets left="60.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="eliminar" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Eliminar">
+                        <Button fx:id="eliminar" mnemonicParsing="false" onMouseClicked="#deleteWord" prefHeight="26.0" prefWidth="87.0" text="Eliminar">
                            <VBox.margin>
                               <Insets left="60.0" top="10.0" />
                            </VBox.margin>
