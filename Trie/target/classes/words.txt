@@ -353,3 +353,8 @@ morada
 morador
 pichincha
 batalla
+batallar
+
+batallas
+
+batallon

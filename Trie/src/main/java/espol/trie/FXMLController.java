@@ -142,8 +142,9 @@ public class FXMLController implements Initializable {
              throw new RuntimeException();
              }else{
              String linea= word;
-             bf.newLine();
+             
              bf.write(linea);
+             bf.newLine();
              trie.insert(word);
              words.add(linea);
              loadTrieTree();

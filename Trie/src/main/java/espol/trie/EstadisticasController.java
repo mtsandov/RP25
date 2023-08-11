@@ -83,9 +83,11 @@ public class EstadisticasController implements Initializable {
     public int cantidad_palabras(){
         try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
             String linea;
-            while ((linea = bf.readLine()) != null && !linea.equals("") ){
+            while ((linea = bf.readLine()) != null ){
+                if(!linea.equals("")){
                 num_palabras++;
             }
+           }
         } catch (IOException ex) {
             System.out.println("no se pudieron cargar las palabras");
             
@@ -102,7 +104,8 @@ public class EstadisticasController implements Initializable {
         }
         try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
             String linea;
-            while ((linea = bf.readLine()) != null && !linea.equals("")){
+            while ((linea = bf.readLine()) != null){
+                if(!linea.equals("")){
                 Character character = linea.charAt(0);
                 int indice = 0;
                 for(String letra: letras()){
@@ -113,6 +116,7 @@ public class EstadisticasController implements Initializable {
                 }
                 indice ++;
             }
+         }
            }
         } catch (IOException ex) {
             System.out.println("no se pudieron cargar las palabras");
