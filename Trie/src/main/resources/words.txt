@@ -18,7 +18,6 @@ pintura
 arte
 café
 tarjeta
-alumno
 nuevo
 viejo
 grande
@@ -352,4 +351,8 @@ morada
 morador
 pichincha
 batalla
+alumno
 palabra
+empresa
+estructura
+estructural

@@ -264,6 +264,7 @@ public class FXMLController implements Initializable {
         fillTable.setVisible(false);
         game.setVisible(false);
         estadisticas.setVisible(false);
+        txtField.setVisible(false);
     }
     
     private void habilitarBotones(){
@@ -272,6 +273,7 @@ public class FXMLController implements Initializable {
         eliminar.setVisible(true);
         fillTable.setVisible(true);
         game.setVisible(true);
+        txtField.setVisible(true);
         estadisticas.setVisible(true);
     }
     
@@ -316,15 +318,21 @@ public class FXMLController implements Initializable {
     private void deleteWord(){
         String word = txtField.getText().toLowerCase();
          try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
+             if(word.isEmpty() || word == null){
+             throw new NullPointerException();
+         }
              List<String> lineas = new LinkedList<>();
             String linea;
+            boolean verificador = trie.search(word);
+            if(verificador==false){
+             throw new RuntimeException();
+             }else{
             while ((linea = bf.readLine()) != null) {
                 if(!linea.equals(word)){
                     lineas.add(linea);
                 }
             }
             trie.eliminarPalabra(word);
-            
             bf.close();
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(path));
@@ -332,13 +340,21 @@ public class FXMLController implements Initializable {
                 writer.write(nuevaLinea);
                 writer.newLine();
             }
-
             writer.close();
-
+            AlertBoxes.infoAlert("Exito!", "Se ha eliminado la palabra :)", "Prueba con otra palabra");
+            }
         } catch (IOException ex) {
             System.out.println("no se pudieron cargar las palabras");
             
             ex.printStackTrace();
+        }catch (NullPointerException n) {
+            disableButtons();
+         hbox.getChildren().clear();
+            AlertBoxes.errorAlert("Error", "No puede dejar ningún campo de texto vacío", "Inténtelo nuevamente");
+        }catch (RuntimeException n) {
+            disableButtons();
+         hbox.getChildren().clear();
+            AlertBoxes.errorAlert("Fallo", "La palabra no existe", "Inténtelo nuevamente");
         } 
     }
     
