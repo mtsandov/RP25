@@ -5,6 +5,8 @@ module espol {
     requires controlsfx;
     requires javafx.base;
     requires javafx.graphics;
+    requires java.desktop;
+    requires java.logging;
 
     
     opens espol.trie to javafx.fxml;

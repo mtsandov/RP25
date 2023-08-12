@@ -286,7 +286,6 @@ casilla
 foco
 foca
 focalizar
-palabra
 paloma
 palco
 palma
@@ -353,8 +352,4 @@ morada
 morador
 pichincha
 batalla
-batallar
-
-batallas
-
-batallon
+palabra

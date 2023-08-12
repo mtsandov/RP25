@@ -1,5 +1,6 @@
 tda\Tree.class
 espol\trie\Data.class
+espol\trie\FileManager.class
 espol\trie\MainApp.class
 espol\trie\EstadisticasController.class
 espol\trie\FXMLController.class

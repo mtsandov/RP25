@@ -41,6 +41,8 @@ public class FXMLController implements Initializable {
     @FXML
     private TextField txtField;
     @FXML
+    private Button load;
+    @FXML
     private Button eliminar;
     @FXML
     private Button estadisticas;
@@ -68,19 +70,21 @@ public class FXMLController implements Initializable {
     private TableColumn column1;
     @FXML
     private TableColumn column2;
-    
-    
+
     private static final LinkedList<String> words = new LinkedList<>();
     
     private static final Random RANDOM = new Random();
     private  String letras = "";
     private AutoCompletionBinding<String> autoCompletionBinding;
-    
+    public static String path = "";
+
     Tree<Character> trie = new Tree(new TreeNode("Root Node"));
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {      
+    public void initialize(URL url, ResourceBundle rb) {
+
         loadTrieTree();
+        deshabilitarBotones();
         autoCompletarPalabra();
         disableButtons(); 
         try {
@@ -89,9 +93,11 @@ public class FXMLController implements Initializable {
             ex.printStackTrace();
         }
     }
+    
+    
 
     public void loadTrieTree(){
-        try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
+        try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
                 boolean verificador = trie.search(linea);
@@ -100,13 +106,14 @@ public class FXMLController implements Initializable {
                 words.add(linea);
                 }
             }
+        } catch (FileNotFoundException e) {
+            AlertBoxes.infoAlert("Aviso!", "Por favor cargue un archivo", "Utiliza el boton con el icono de archivo");
         } catch (IOException ex) {
             System.out.println("no se pudieron cargar las palabras");
             
             ex.printStackTrace();
         }
     }
-    
     
     @FXML
     private void buscarPalabra(MouseEvent event) {
@@ -133,7 +140,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void insertarPalabra(MouseEvent event){
         String word = txtField.getText().toLowerCase();
-        try(BufferedWriter bf = new BufferedWriter(new FileWriter("src\\main\\resources\\words.txt",true))){
+        try(BufferedWriter bf = new BufferedWriter(new FileWriter(path,true))){
             if(word.isEmpty() || word == null){
              throw new NullPointerException();
          }
@@ -169,7 +176,6 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void autoCompletarPalabra(){   
-        loadTrieTree();
         String prefix = txtField.getText().toLowerCase(); // obtengo el prefijo del campo de texto
         List<String> wordsCompleted = trie.autoComplete(prefix);
         TextFields.bindAutoCompletion(txtField, wordsCompleted);
@@ -253,6 +259,24 @@ public class FXMLController implements Initializable {
         tableTwo.setVisible(false);
     }
     
+    private void deshabilitarBotones(){
+        buscar.setVisible(false);
+        insertar.setVisible(false);
+        eliminar.setVisible(false);
+        fillTable.setVisible(false);
+        game.setVisible(false);
+        estadisticas.setVisible(false);
+    }
+    
+    private void habilitarBotones(){
+        buscar.setVisible(true);
+        insertar.setVisible(true);
+        eliminar.setVisible(true);
+        fillTable.setVisible(true);
+        game.setVisible(true);
+        estadisticas.setVisible(true);
+    }
+    
     private void cargarBotones() throws FileNotFoundException{
          estadisticas.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\estadisticas.png" ),20,20,true,false)));  
          buscar.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\buscar.png" ),20,20,true,false)));  
@@ -261,6 +285,7 @@ public class FXMLController implements Initializable {
          game.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\game.png" ),20,20,true,false)));
          check.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\check.png" ),20,20,true,false)));
          fillTable.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\table.png" ),20,20,true,false)));
+         load.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\file.png" ),20,20,true,false)));
     }
     
     @FXML
@@ -292,7 +317,7 @@ public class FXMLController implements Initializable {
     @FXML 
     private void deleteWord(){
         String word = txtField.getText().toLowerCase();
-         try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
+         try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
              List<String> lineas = new LinkedList<>();
             String linea;
             while ((linea = bf.readLine()) != null) {
@@ -304,7 +329,7 @@ public class FXMLController implements Initializable {
             
             bf.close();
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\main\\resources\\words.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
             for (String nuevaLinea : lineas) {
                 writer.write(nuevaLinea);
                 writer.newLine();
@@ -317,6 +342,15 @@ public class FXMLController implements Initializable {
             
             ex.printStackTrace();
         } 
+    }
+    
+    @FXML
+    private void cargarArchivo(){
+        FileManager source = new FileManager();
+        path= source.file_Selection();
+        System.out.println(path);
+        habilitarBotones();
+        loadTrieTree();
     }
     
 

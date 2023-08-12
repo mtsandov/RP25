@@ -37,6 +37,8 @@ public class EstadisticasController implements Initializable {
     @FXML
     private TableColumn<Data, Integer> columna2;
     
+    public static String  path = FXMLController.path;
+    public static boolean visitado = false;
     
     Integer num_palabras = 0;
     /**
@@ -81,7 +83,9 @@ public class EstadisticasController implements Initializable {
     }    
     
     public int cantidad_palabras(){
-        try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
+        
+
+        try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
             String linea;
             while ((linea = bf.readLine()) != null ){
                 if(!linea.equals("")){
@@ -102,7 +106,7 @@ public class EstadisticasController implements Initializable {
         for(int i=0; i <27; i++){
             cantidades.add(0);
         }
-        try (BufferedReader bf = new BufferedReader(new FileReader("src\\main\\resources\\words.txt"))) {
+        try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
             String linea;
             while ((linea = bf.readLine()) != null){
                 if(!linea.equals("")){
@@ -128,7 +132,8 @@ public class EstadisticasController implements Initializable {
     }
     
      @FXML
-    private void regresar(MouseEvent event) throws IOException {        
+    private void regresar(MouseEvent event) throws IOException {
+        visitado=true;
         MainApp.setRoot("primary","");
    }
  
