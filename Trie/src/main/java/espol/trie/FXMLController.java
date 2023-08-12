@@ -82,7 +82,7 @@ public class FXMLController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         loadTrieTree();
         deshabilitarBotones();
         autoCompletarPalabra();
@@ -94,8 +94,6 @@ public class FXMLController implements Initializable {
         }
     }
     
-    
-
     public void loadTrieTree(){
         try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
             String linea;

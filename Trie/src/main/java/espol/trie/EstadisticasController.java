@@ -7,17 +7,24 @@ package espol.trie;
 
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 
@@ -31,6 +38,8 @@ public class EstadisticasController implements Initializable {
     
     @FXML
     private TableView<Data> table;
+    @FXML
+    private Button back;
     
     @FXML
     private TableColumn<Data, String> columna1;
@@ -46,6 +55,11 @@ public class EstadisticasController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            back.setGraphic(new ImageView(new Image(new FileInputStream("src\\main\\resources\\back.png" ),20,20,true,false)));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(EstadisticasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         columna1.setCellValueFactory(new PropertyValueFactory<>("character"));
         columna2.setCellValueFactory(new PropertyValueFactory<>("number"));
 

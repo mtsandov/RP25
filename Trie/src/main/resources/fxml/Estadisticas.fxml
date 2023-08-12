@@ -13,10 +13,10 @@
    <children>
       <HBox layoutX="-3.0" prefHeight="47.0" prefWidth="434.0">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#regresar" text="Regresar" />
+            <Button fx:id="back" mnemonicParsing="false" onMouseClicked="#regresar" prefHeight="26.0" prefWidth="30.0" />
             <Label text="Estadisticas" textFill="#595959">
                <HBox.margin>
-                  <Insets left="85.0" top="15.0" />
+                  <Insets left="115.0" top="15.0" />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="28.0" />
