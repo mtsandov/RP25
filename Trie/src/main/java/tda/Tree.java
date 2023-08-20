@@ -108,9 +108,14 @@ private List<TreeNode<E>> leaves = new ArrayList<>(); // Lista para almacenar la
             }
             
             if (i == wordSize - 2) {
-                   current = current.getChildren().get((E) Character.valueOf(character));
-                    current.getChildren().clear();
-                    System.out.println(current.getChildren());
+                   current = current.getChildren().get( Character.valueOf(character));
+                   for(int n =0; n<wordSize ; n++){
+                       if(current.getChildren().size()==1){
+                       current.getChildren().clear();
+                       current= this.getParentNode(current);
+                   }
+                       current.getChildren().remove(word.charAt(0));
+                   }
                     return true;
                 }
             
